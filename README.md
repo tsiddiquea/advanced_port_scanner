@@ -177,9 +177,9 @@ Scan Completed: 2026-03-09 22:42:48.698873
 
 ## Screenshots
 
-![Terminal Screenshot](image/terminal.jpg)
+![Terminal Screenshot](terminal.jpg)
 
-![Report Screenshot](image/report.jpg)
+![Report Screenshot](report.jpg)
 
 ## Usage
 Run the scanner from the terminal:
@@ -241,4 +241,5 @@ Developed as a cybersecurity learning project to demonstrate network reconnaissa
 ## License
 
 This project is intended for educational and research purposes only.
+
 Use responsibly and only in authorized environments.
