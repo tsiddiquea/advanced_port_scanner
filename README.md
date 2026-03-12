@@ -1,53 +1,52 @@
-# Advanced Multithreaded Port Scanner (Python)
+# Advanced TCP Port Scanner (Python)
 
-A fast, multithreaded TCP port scanner built in Python that performs service detection, banner grabbing, and risk classification for common network services. This project demonstrates practical network reconnaissance techniques used in cybersecurity and penetration testing.
+A high-performance network reconnaissance tool developed in Python that performs concurrent port scanning, service identification, and risk-oriented reporting.
+This project demonstrates practical knowledge of network security concepts, socket programming, and concurrent system design.
 
 
-## Overview
+## Project Purpose
 
-This project implements a multithreaded port scanning tool that identifies open TCP ports on a target system and attempts to detect the services running on those ports.
+During security assessments and penetration testing engagements, identifying exposed network services is a critical first step.
+This tool simulates that workflow by scanning a target host for open TCP ports and attempting to infer the services running on those ports.
 
-The scanner is designed to simulate how professional security tools perform network reconnaissance during penetration testing.
+The scanner was developed as a cybersecurity learning project focused on understanding:
 
-It supports:
-
-* High-speed multithreaded scanning
-* Service detection using known port mappings
-* Banner grabbing for service fingerprinting
-* Risk classification for sensitive ports
+* Network attack surface discovery
+* Service fingerprinting techniques
+* Secure system exposure analysis
+* Performance optimization through multithreading
 * Scan reporting and logging
 
-The tool is written entirely in Python using only standard libraries, making it portable and easy to run in controlled lab environments.
 
 
-## Key Features
+## Core Capabilities
 
-### Multithreaded Scanning
+### Concurrent Port Scanning
 
-The scanner uses Python threading and queue-based task distribution to scan multiple ports simultaneously, dramatically improving performance compared to sequential scanning.
+Implements a threaded scanning architecture allowing multiple ports to be probed simultaneously.
+This reduces scan time significantly compared to sequential approaches.
 
-### Service Detection
+### Service Enumeration
 
-Open ports are mapped to known services such as HTTP, SSH, FTP, and MySQL using a predefined service dictionary.
+Maps detected open ports to commonly associated services such as:
+* HTTP
+* SSH
+* FTP
+* DNS
+* MySQL
 
-### Banner Grabbing
+This helps contextualize security risks.
 
-When possible, the scanner attempts to retrieve a service banner from open ports to help identify running applications.
+### Banner Retrieval
 
-### Risk Classification
+Attempts to collect response banners from open services to assist with identification of software versions or protocols.
 
-Certain ports commonly associated with sensitive services are flagged as HIGH RISK:
+### Exposure Risk Indication
+Ports commonly linked to sensitive infrastructure access (e.g., SSH or SMB) are highlighted to indicate potential attack vectors.
 
-* FTP (21)
-* SSH (22)
-* SMB (445)
-* RDP (3389)
+### Structured Scan Reporting
 
-This provides immediate visibility into potentially exposed services.
-
-### Scan Report Generation
-
-After the scan completes, the tool generates a structured report containing:
+Generates a formatted text report summarizing findings including:
 
 * Target host
 * Scan timestamp
@@ -56,7 +55,20 @@ After the scan completes, the tool generates a structured report containing:
 * Banner information
 * Risk classification
 
-The report is saved to: `port_scan_report.txt`
+## System Design Overview
+
+The scanner operates through the following workflow:
+1. Resolve the target hostname to an IP address
+2. Populate a synchronized queue with the desired port range
+3. Spawn worker threads that process ports in parallel
+4. Attempt TCP connections with configurable timeouts
+5. Collect and store scan results
+6. Produce a final report for analysis. The report is saved to: `port_scan_report.txt`
+
+This architecture demonstrates practical application of:
+* socket-level networking
+* concurrency control
+* basic reconnaissance automation
 
 ## Project Structure
 ```
@@ -196,50 +208,37 @@ python port_scanner.py 127.0.0.1 --start 1 --end 1024
 ```
 ## Performance
 
-Because the scanner uses 100 concurrent threads, it can scan hundreds of ports quickly while maintaining reasonable network load.
-
-Performance depends on:
-
-* Network latency
-* Target firewall rules
-* Timeout settings
-
-
+By distributing scan tasks across multiple threads, the scanner significantly reduces total scan time compared to sequential approaches.
+Performance may vary depending on network latency, firewall behavior, and configured timeout values.
 
 ## Security & Ethical Use
 
-This tool is intended for:
+This tool is intended strictly for:
+* Cybersecurity education
+* Authorized penetration testing labs
+* Defensive network auditing
 
-* cybersecurity education
-* penetration testing labs
-* defensive security research
-* controlled network auditing
-
-Do not use this scanner on networks or systems without explicit permission.
-
-Unauthorized scanning may violate laws and organizational policies.
+Scanning networks without permission may violate laws or institutional policies.
+Users are responsible for ensuring ethical use.
 
 
 
 ## Learning Objectives
 
-This project demonstrates practical concepts used in cybersecurity:
-
-* TCP networking fundamentals
-* Socket programming
-* Concurrent programming with threads
-* Network reconnaissance techniques
-* Service fingerprinting
-* Security risk identification
+This project helps develop understanding of:
+* Network reconnaissance fundamentals
+* Concurrent programming strategies
+* Service fingerprinting concepts
+* Exposure risk awareness
+* Automation of security assessment tasks
 
 
 ## Author
 
-Developed as a cybersecurity learning project to demonstrate network reconnaissance techniques and multithreaded programming in Python.
-
+Developed as part of a cybersecurity learning portfolio to gain practical experience with network scanning methodologies and system exposure analysis.
 
 ## License
 
-This project is intended for educational and research purposes only.
+This project is provided for educational purposes.
+Users are encouraged to modify and extend the tool for personal learning in authorized environments.
 
-Use responsibly and only in authorized environments.
